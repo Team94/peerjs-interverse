@@ -1,5 +1,13 @@
-import { PeerServer } from "peer";
+//Peer server
+var privateKey = fs.readFileSync("sslcert/server.key", "utf8");
+var certificate = fs.readFileSync("sslcert/server.crt", "utf8");
 
-PeerServer({ port: 9001, path: "/" });
-
-console.log("PeerJS 서버 실행중..");
+const { PeerServer } = require("peer");
+PeerServer({
+  port: 443,
+  path: "/",
+  ssl: {
+    key: privateKey,
+    cert: certificate,
+  },
+});
